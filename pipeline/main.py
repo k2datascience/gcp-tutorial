@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     # Initialize database connection
     try:
-        engine = create_engine('postgresql://postgres:password@35.202.135.5:5432/postgres')
+        engine = create_engine('postgresql://postgres:password@HOSTADDRESS:5432/postgres')
         print("Database found.")
     except:
         print("No database available.")
