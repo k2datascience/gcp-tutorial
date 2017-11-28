@@ -1,5 +1,3 @@
-import json
-
 from sqlalchemy import create_engine
 
 from ingestion import scrape_eberts_listing, scrape_movie_reviews, scrape_imdb_listing
@@ -12,7 +10,7 @@ if __name__ == "__main__":
 
     # Initialize database connection
     try:
-        engine = create_engine('postgresql://postgres:password@HOSTADDRESS:5432/postgres')
+        engine = create_engine('postgresql://postgres:password@INSERTHOSTADDRESS:5432/postgres')
         print("Database found.")
     except:
         print("No database available.")
