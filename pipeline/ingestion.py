@@ -37,10 +37,8 @@ def scrape_eberts_listing(num_pages=10):
             review_list.append([count, title, stars, year, url])
 
 
-    df = pd.DataFrame(review_list, columns = ['ID', 'Title', 'EbertStars', 'Year', 'URL'])
+    df = pd.DataFrame(review_list, columns = ['id', 'title', 'ebertstars', 'year', 'url'])
     return df
-
-
 
 def scrape_movie_reviews(df):
     """
@@ -49,7 +47,7 @@ def scrape_movie_reviews(df):
     """
     scraped_list = list()
 
-    for link in df['URL']:
+    for link in df['url']:
         full_link = "http://www.rogerebert.com" + link
         webpage = requests.get(full_link).text
         soup = BeautifulSoup(webpage, 'lxml')
@@ -73,7 +71,7 @@ def scrape_movie_reviews(df):
 
         time.sleep(0.25)
 
-    df = pd.DataFrame(scraped_list, columns = ['URL', 'Rating', 'Runtime', 'Review'])
+    df = pd.DataFrame(scraped_list, columns = ['url', 'rating', 'runtime', 'review'])
 
     return df, scraped_list
 
@@ -84,7 +82,7 @@ def scrape_imdb_listing(df):
     """
     movie_list = list()
 
-    for movie in df['Title']:
+    for movie in df['title']:
         base_url = 'http://www.imdb.com/find?q='
         url = base_url + movie +'&s=all'
         webpage = requests.get(url).text
@@ -155,8 +153,8 @@ def scrape_imdb_listing(df):
         time.sleep(0.25)
 
 
-    df = pd.DataFrame(movie_list, columns = ['Title', 'IMDB_Rating', 'Rating_Count',
-        'Description', 'Metascore', 'User_Review_Count', 'Critic_Review_Count',
-        'Director', 'Country', 'Release_Date'])
+    df = pd.DataFrame(movie_list, columns = ['title', 'imdb_rating', 'rating_count',
+        'description', 'metascore', 'user_review_count', 'critic_review_count',
+        'director', 'country', 'release_date'])
 
     return df, movie_list
